@@ -9,13 +9,13 @@ const Data = () => {
         fName: { label: "Enter the patient's first name: ", v: "" },
         lName: { label: "Enter the patient's last name: ", v: "" },
 
-        normal1: { label: "Comfortable Trial 1: ", v: "" },
-        normal2: { label: "Comfortable Trial 2: ", v: "" },
-        normal3: { label: "Comfortable Trial 3: ", v: "" },
+        normal1: { label: "Comfortable Trial 1 (seconds): ", v: "" },
+        normal2: { label: "Comfortable Trial 2 (seconds): ", v: "" },
+        normal3: { label: "Comfortable Trial 3 (seconds): ", v: "" },
 
-        fast1: { label: "Fast Trial 1: ", v: "" },
-        fast2: { label: "Fast Trial 2: ", v: "" },
-        fast3: { label: "Fast Trial 2: ", v: "" }
+        fast1: { label: "Fast Trial 1 (seconds): ", v: "" },
+        fast2: { label: "Fast Trial 2 (seconds): ", v: "" },
+        fast3: { label: "Fast Trial 2 (seconds): ", v: "" }
     });
 
     //submission state, used to display once the submit button is hit
@@ -35,12 +35,13 @@ const Data = () => {
         setData({ ...data, [id]: { ...data[id], value } });
     };
 
-    //sets submitted data equal to the main state, thus rendering the data 
+    //sets submitted data equal to the main state, thus rendering the data
+    //also goes ahead and divides the inputted numbers by 6, to account for only 6 of the 10 meters being timed  
     const handleSubmit = (e) => {
         setSubmittedData({
             fName: data.fName.value, lName: data.lName.value,
-            normal1: data.normal1.value, normal2: data.normal2.value, normal3: data.normal3.value,
-            fast1: data.fast1.value, fast2: data.fast2.value, fast3: data.fast3.value
+            normal1: data.normal1.value / 6, normal2: data.normal2.value / 6, normal3: data.normal3.value / 6,
+            fast1: data.fast1.value / 6, fast2: data.fast2.value / 6, fast3: data.fast3.value / 6
         })
     };
 
@@ -65,7 +66,7 @@ const Data = () => {
             <div class="row">
                 <div class="col">
                     <h3>Please Enter the Patient's Data:</h3>
-                    <br></br>
+                    <br/>
 
                     {Object.keys(data).map((key) => (
                         <>
@@ -81,7 +82,7 @@ const Data = () => {
 
                 <div class="col">
                     <h3>Copyable Data:</h3>
-                    <br></br>
+                    <br/>
                     <div className="container">
                         <div className="code-snippet">
                             <div className="code-section">
@@ -89,28 +90,27 @@ const Data = () => {
                                     <h5>Name: {submittedData.fName}{" "}{submittedData.lName}</h5>
                                     <h5>Date: {new Date().toLocaleString() + ""} </h5>
                                     <br></br>
-                                    <h6>Comfortable Trial 1: {submittedData.normal1} m/s</h6>
-                                    <h6>Comfortable Trial 2: {submittedData.normal2} m/s</h6>
-                                    <h6>Comfortable Trial 3: {submittedData.normal3} m/s</h6>
-                                    <h6>Comfortable Trial Avg: {average([+submittedData.normal1, +submittedData.normal2, +submittedData.normal3])} m/s</h6>
+                                    <h6>Comfortable Trial 1: {submittedData.normal1.toFixed(2)} m/s</h6>
+                                    <h6>Comfortable Trial 2: {submittedData.normal2.toFixed(2)} m/s</h6>
+                                    <h6>Comfortable Trial 3: {submittedData.normal3.toFixed(2)} m/s</h6>
+                                    <h6>Comfortable Trial Avg: {average([+submittedData.normal1, +submittedData.normal2, +submittedData.normal3]).toFixed(2)} m/s</h6>
                                     <br></br>
-                                    <h6>Fast Trial 1: {submittedData.fast1} m/s</h6>
-                                    <h6>Fast Trial 2: {submittedData.fast2} m/s</h6>
-                                    <h6>Fast Trial 3: {submittedData.fast3} m/s</h6>
-                                    <h6>Fast Trial Avg: {average([+submittedData.fast1, +submittedData.fast2, +submittedData.fast3])} m/s</h6>
+                                    <h6>Fast Trial 1: {submittedData.fast1.toFixed(2)} m/s</h6>
+                                    <h6>Fast Trial 2: {submittedData.fast2.toFixed(2)} m/s</h6>
+                                    <h6>Fast Trial 3: {submittedData.fast3.toFixed(2)} m/s</h6>
+                                    <h6>Fast Trial Avg: {average([+submittedData.fast1, +submittedData.fast2, +submittedData.fast3]).toFixed(2)} m/s</h6>
                                 </pre>
 
                                 <CopyToClipboard
                                     text={`${submittedData.fName} ` + `${submittedData.lName} \n` + `${new Date().toLocaleString() + ""} \n`
-                                        + `${submittedData.normal1} m/s \n` + `${submittedData.normal2} m/s \n` +
-                                        `${submittedData.normal3} m/s \n` +
-                                        `${average([+submittedData.normal1, +submittedData.normal2, +submittedData.normal3])} \n` +
-                                        `${submittedData.fast1} m/s \n` + `${submittedData.fast2} m/s \n` + `${submittedData.fast3} m/s \n` +
-                                        `${average([+submittedData.fast1, +submittedData.fast2, +submittedData.fast3])} m/s`}
+                                        + `${submittedData.normal1.toFixed(2)} m/s \n` + `${submittedData.normal2.toFixed(2)} m/s \n` +
+                                        `${submittedData.normal3.toFixed(2)} m/s \n` +
+                                        `${average([+submittedData.normal1, +submittedData.normal2, +submittedData.normal3]).toFixed(2)} m/s \n` +
+                                        `${submittedData.fast1.toFixed(2)} m/s \n` + `${submittedData.fast2.toFixed(2)} m/s \n` + `${submittedData.fast3.toFixed(2)} m/s \n` +
+                                        `${average([+submittedData.fast1, +submittedData.fast2, +submittedData.fast3]).toFixed(2)} m/s`}
                                     onCopy={onCopyText}>
                                     <h5>Copy Data:  {isCopied ? "Copied!" : <MdContentCopy />}</h5>
                                 </CopyToClipboard>
-
                             </div>
                         </div>
                     </div>
