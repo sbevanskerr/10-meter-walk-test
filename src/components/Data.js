@@ -25,9 +25,11 @@ const Data = () => {
 
         normal1: "",
         normal2: "",
+        normal3: "",
 
         fast1: "",
-        fast2: ""
+        fast2: "",
+        fast3: ""
     })
 
     //sets state equal to inputted data
@@ -90,23 +92,23 @@ const Data = () => {
                                     <h5>Name: {submittedData.fName}{" "}{submittedData.lName}</h5>
                                     <h5>Date: {new Date().toLocaleString() + ""} </h5>
                                     <br></br>
-                                    <h6>Comfortable Trial 1: {submittedData.normal1.toFixed(2)} m/s</h6>
-                                    <h6>Comfortable Trial 2: {submittedData.normal2.toFixed(2)} m/s</h6>
-                                    <h6>Comfortable Trial 3: {submittedData.normal3.toFixed(2)} m/s</h6>
+                                    <h6>Comfortable Trial 1: {parseFloat(submittedData.normal1).toFixed(2)} m/s</h6>
+                                    <h6>Comfortable Trial 2: {parseFloat(submittedData.normal2).toFixed(2)} m/s</h6>
+                                    <h6>Comfortable Trial 3: {parseFloat(submittedData.normal3).toFixed(2)} m/s</h6>
                                     <h6>Comfortable Trial Avg: {average([+submittedData.normal1, +submittedData.normal2, +submittedData.normal3]).toFixed(2)} m/s</h6>
                                     <br></br>
-                                    <h6>Fast Trial 1: {submittedData.fast1.toFixed(2)} m/s</h6>
-                                    <h6>Fast Trial 2: {submittedData.fast2.toFixed(2)} m/s</h6>
-                                    <h6>Fast Trial 3: {submittedData.fast3.toFixed(2)} m/s</h6>
+                                    <h6>Fast Trial 1: {parseFloat(submittedData.fast1).toFixed(2)} m/s</h6>
+                                    <h6>Fast Trial 2: {parseFloat(submittedData.fast2).toFixed(2)} m/s</h6>
+                                    <h6>Fast Trial 3: {parseFloat(submittedData.fast3).toFixed(2)} m/s</h6>
                                     <h6>Fast Trial Avg: {average([+submittedData.fast1, +submittedData.fast2, +submittedData.fast3]).toFixed(2)} m/s</h6>
                                 </pre>
 
                                 <CopyToClipboard
                                     text={`${submittedData.fName} ` + `${submittedData.lName} \n` + `${new Date().toLocaleString() + ""} \n`
-                                        + `${submittedData.normal1.toFixed(2)} m/s \n` + `${submittedData.normal2.toFixed(2)} m/s \n` +
-                                        `${submittedData.normal3.toFixed(2)} m/s \n` +
+                                        + `${parseFloat(submittedData.normal1).toFixed(2)} m/s \n` + `${parseFloat(submittedData.normal2).toFixed(2)} m/s \n` +
+                                        `${parseFloat(submittedData.normal3).toFixed(2)} m/s \n` +
                                         `${average([+submittedData.normal1, +submittedData.normal2, +submittedData.normal3]).toFixed(2)} m/s \n` +
-                                        `${submittedData.fast1.toFixed(2)} m/s \n` + `${submittedData.fast2.toFixed(2)} m/s \n` + `${submittedData.fast3.toFixed(2)} m/s \n` +
+                                        `${parseFloat(submittedData.fast1).toFixed(2)} m/s \n` + `${parseFloat(submittedData.fast2).toFixed(2)} m/s \n` + `${parseFloat(submittedData.fast3).toFixed(2)} m/s \n` +
                                         `${average([+submittedData.fast1, +submittedData.fast2, +submittedData.fast3]).toFixed(2)} m/s`}
                                     onCopy={onCopyText}>
                                     <h5>Copy Data:  {isCopied ? "Copied!" : <MdContentCopy />}</h5>
